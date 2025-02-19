@@ -50,18 +50,28 @@ public class ContactManagement {
     private static void addNewContact() {
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
-
-        System.out.println("1. Personal Contact");
-        System.out.println("2. Business Contact");
-        System.out.print("Enter your contact option: ");
-        int contactOption = scanner.nextInt();
-        scanner.nextLine(); // consume newline
-
+    
+        int contactOption;
+        while (true) {
+            System.out.println("1. Personal Contact");
+            System.out.println("2. Business Contact");
+            System.out.print("Enter your contact option: ");
+            contactOption = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+    
+            // Check if the input is valid (1 or 2)
+            if (contactOption == 1 || contactOption == 2) {
+                break;  // Valid input, exit the loop
+            } else {
+                System.out.println("Invalid option! Please enter 1 for Personal or 2 for Business.");
+            }
+        }
+    
         String type = (contactOption == 1) ? "Personal" : "Business";
-
+    
         System.out.print("Enter phone number: ");
         String phoneNumber = scanner.nextLine();
-
+    
         // Create a new Contact (email is no longer required)
         Contact newContact = new Contact(name, type, phoneNumber);
         contacts.add(newContact);
